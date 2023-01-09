@@ -3,10 +3,17 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [question, setQuestion] = useState("");
   const [result, setResult] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+    
+    async function handleClick(event) {
+      setIsLoading(true);
+      await askGPT(event);
+      setIsLoading(false);
+    }
 
-  async function onSubmit(event) {
+  async function askGPT(event) {
     event.preventDefault();
     try {
       const response = await fetch("/api/generate", {
@@ -14,7 +21,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ question: question }),
       });
 
       const data = await response.json();
@@ -23,7 +30,7 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      setQuestion("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -34,23 +41,23 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>TMS AI</title>
+        <link rel="icon" href="/tms.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
-        <form onSubmit={onSubmit}>
+        <img src="/New_TMS_Logo_Standard.png" className={styles.logo} />
+        <h3>Ask me Mortgage</h3>
+        <form>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="question"
+            placeholder="Enter a question"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
-        </form>
+          <button onClick={handleClick} disabled={isLoading}>{isLoading ? 'Thinking...' : 'Submit'}</button>
+          </form>
         <div className={styles.result}>{result}</div>
       </main>
     </div>
