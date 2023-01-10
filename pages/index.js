@@ -22,7 +22,7 @@ export default function Home() {
     event.preventDefault();
     setLastQuestion("");
     setResult("");
-    
+
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
