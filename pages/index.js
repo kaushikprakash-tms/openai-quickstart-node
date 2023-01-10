@@ -74,7 +74,8 @@ export default function Home() {
 
         <h4>People also ask</h4>
           <div className={styles.faq}>
-            <q onClick={handleFAQ}>What is the down payment criteria on an FHA loan ?</q>
+            <q onClick={handleFAQ}>Who are you?</q>
+            <q onClick={handleFAQ}>What is the down payment criteria on an FHA loan?</q>
             <q onClick={handleFAQ}>What is the minimum down payment for a house in Wisconsin?</q>
             <q onClick={handleFAQ}>How soon can you get a mortgage after Chapter 13 discharge?</q>
             <q onClick={handleFAQ}>How long after Chapter 13 Can I get FHA?</q>
