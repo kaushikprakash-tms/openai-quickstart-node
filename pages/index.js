@@ -75,9 +75,19 @@ export default function Home() {
         <h4>People also ask</h4>
           <div className={styles.faq}>
             <q onClick={handleFAQ}>Who are you?</q>
-            <q onClick={handleFAQ}>What is the down payment criteria on an FHA loan?</q>
+            <q onClick={handleFAQ}>Can boarder income be used to qualify?</q>
+            <q onClick={handleFAQ}>Can a gift be used for down payment on an investment property?</q>
+            <q onClick={handleFAQ}>Does VA allow gifts of equity? </q>
+            <q onClick={handleFAQ}>What is required for disputed tradelines on a credit report? </q>
+            <q onClick={handleFAQ}>What is our tax transcript policy? </q>
+            <q onClick={handleFAQ}>What is required to document gift funds for down payment?</q>
+            <q onClick={handleFAQ}>Who may gift a gift on an FHA loan? </q>
+            <q onClick={handleFAQ}>Are desktop appraisals allowed for conventional loans? </q>
+            <q onClick={handleFAQ}>What are the temporary condo and co-op requirements for conventional loans? </q>
+            <q onClick={handleFAQ}>What is required for an FHA single unit condo approval? </q>
+            {/* <q onClick={handleFAQ}>What is the down payment criteria on an FHA loan?</q>
             <q onClick={handleFAQ}>What is the minimum down payment for a house in Wisconsin?</q>
-            <q onClick={handleFAQ}>How soon can you get a mortgage after Chapter 13 discharge?</q>
+            <q onClick={handleFAQ}>How soon can you get a mortgage after Chapter 13 discharge?</q> */}
             <q onClick={handleFAQ}>How long after Chapter 13 Can I get FHA?</q>
           </div>
 
