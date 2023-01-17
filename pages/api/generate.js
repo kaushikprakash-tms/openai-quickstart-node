@@ -27,7 +27,7 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createCompletion({
-      prompt: 'The following is a conversation with a mortgage AI assistant built by Total MOrtgage. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nAI: I am an AI created by Total Mortgage. How can I help you today?\n' +question,
+      prompt: 'The following is a conversation with a mortgage AI assistant built by Total Mortgage. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who is this?\nAI: I am an AI created by Total Mortgage. How can I help you today?\n' +question,
       model:"text-davinci-003",
       temperature:0.7,
       max_tokens:512,
