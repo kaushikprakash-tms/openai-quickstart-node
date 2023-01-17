@@ -57,7 +57,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/New_TMS_Logo_Standard.png" className={styles.logo} />
-        <h3>Ask me Mortgage</h3>
+        <h3>Ask me a Mortgage question!</h3>
         <form>
           <input
             type="text"
