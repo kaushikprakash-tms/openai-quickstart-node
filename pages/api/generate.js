@@ -29,14 +29,14 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       prompt: 'The following is a conversation with a mortgage AI assistant built by Total Mortgage. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who is this?\nAI: I am an AI created by Total Mortgage. How can I help you today?\n' +question,
       model:"text-davinci-003",
-      temperature:0.7,
+      temperature:0.4,
       max_tokens:512,
       top_p:1,
       frequency_penalty:0,
       presence_penalty:0
     });
 
-    
+      
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
