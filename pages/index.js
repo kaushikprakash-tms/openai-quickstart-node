@@ -9,51 +9,8 @@ import Tab from './Tab';
 import TabPanel from './TabPanel';
 
 export default function Home() {
-  const [question, setQuestion] = useState("");
-  const [lastQuestion, setLastQuestion] = useState("");
-  const [result, setResult] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  
-    
-  async function handleClick(event) {
-    setIsLoading(true);
-    await askGPT(event);
-    setIsLoading(false);
-  }
 
-  function handleFAQ(event) {
-    setQuestion(event.target.innerText);
-    // setIsLoading(false);
-  }
-  async function askGPT(event) {
-    event.preventDefault();
-    setLastQuestion("");
-    setResult("");
-
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: question }),
-      });
-
-      const data = await response.json();
-      if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
-      }
-
-      setResult(data.result.replace(/\n/g, "<br />").replace("<br /><br />","<br />"));
-      setLastQuestion(question);
-      setQuestion("");
-
-    } catch(error) {
-      // Consider implementing your own error handling logic here
-      console.error(error);
-      alert(error.message);
-    }
-  }
+  const [isLoading, setIsLoading] = useState(true);
   
   return (
     <div>
@@ -65,7 +22,7 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/New_TMS_Logo_Standard.png" className={styles.logo} />
         <div className="App">
-            <Tabs>
+            <Tabs loading={isLoading}>
               <TabList>
                 <Tab>Ask AI</Tab>
                 <Tab>Run a Scenario</Tab>

@@ -1,26 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.module.css';
 
-const Tabs = ({ children }) => {
+const Tabs = ({ children, loading }) => {
 
-  if(!children){
-    return;
+  if (!children) {
+    return null;
   }
-  
+
   const [activeTab, setActiveTab] = useState(0);
-
-  const tabList = children.find(child => child.type.name === 'TabList');
+  const tabList = children.filter(child => child.type.name === 'TabList')[0];
   const tabPanels = children.filter(child => child.type.name === 'TabPanel');
+  const newTabList = React.cloneElement(tabList, { activeTab, setActiveTab });
 
+  useEffect(() => {
+    if (loading) {
+      setActiveTab(-1);
+    } else if (activeTab === -1) {
+      setActiveTab(0);
+    }
+  }, [loading]);
 
-  if (!tabList) {
-    throw new Error('TabList component is missing');
-  }
-
+  
   return (
     <div className={styles.tabs}>
-      {React.cloneElement(tabList, { activeTab, setActiveTab })}
-      {tabPanels[activeTab]}
+      {newTabList}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        tabPanels[activeTab]
+      )}
     </div>
   );
 };
