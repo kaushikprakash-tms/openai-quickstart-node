@@ -15,6 +15,9 @@ export default function Home() {
     setIsLoading(false);
   }
 
+  const prompt =
+    "The following is a conversation with a mortgage AI assistant built by Total Mortgage. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who is this?\nAI: I am an AI created by Total Mortgage. How can I help you today?\n";
+
   function handleFAQ(event) {
     setQuestion(event.target.innerText);
     // setIsLoading(false);
@@ -31,7 +34,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: question }),
+        body: JSON.stringify({ question: question, prompt: prompt }),
       });
 
       const data = await response.json();
@@ -89,9 +92,7 @@ export default function Home() {
         </div>
       </div>
       <div className={styles.faqContainer}>
-        <div className={styles.header}>
-          People also ask
-        </div>
+        <div className={styles.header}>People also ask</div>
         <div className={styles.faq}>
           <q onClick={handleFAQ}>Who are you?</q>
           <q onClick={handleFAQ}>Can boarder income be used to qualify?</q>

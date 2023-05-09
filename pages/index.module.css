@@ -139,7 +139,8 @@
 
 .response{
   margin-top: 20px;
-  max-width: 600px;
+  max-width: 50vw;
+  min-width: 300px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -152,6 +153,8 @@
 
 .answer{
   align-items: center;
+  text-align: justify;
+  font-size: 0.5vw;
 }
 
 .container{
@@ -163,6 +166,8 @@
 
 .responseQuestion{
   font-weight: 600;
+  max-width: 50vw;
+  font-size: 0.5vw;
 }
 
 .header{
@@ -237,3 +242,49 @@
   background-color: #fff;
 }
 
+.cardContainer {
+  border: 1px solid #ccc;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 12px 12px 18px 12px;
+  width: calc(33.33% - 32px);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 150px;
+  text-overflow: ellipsis;
+  cursor: pointer
+}
+
+.cardContainer pre {
+  margin: 0;
+}
+
+.cardContainer::after{
+    content:'...';
+    font-size: 16px;
+    background:inherit;
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cardList {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}

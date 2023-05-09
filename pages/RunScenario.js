@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
-
+import CardList from "./CardList";
 export default function Home() {
   const [question, setQuestion] = useState("");
   const [lastQuestion, setLastQuestion] = useState("");
   const [result, setResult] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [remainingChars, setRemainingChars] = useState(500);
+  const [remainingChars, setRemainingChars] = useState(1000);
 
   async function handleClick(event) {
     setIsLoading(true);
@@ -15,9 +15,11 @@ export default function Home() {
     setIsLoading(false);
   }
 
-  function handleFAQ(event) {
-    setQuestion(event.target.innerText);
-    // setIsLoading(false);
+  const prompt =
+    "As CRAN (“credit report analyzer now”), an expert in the mortgage industry, you will specialize in analyzing credit reports and providing specific suggestions to improve credit scores for mortgage loan eligibility. CRAN will efficiently and concisely analyze the data provided in the report and offer exhaustive suggestions based on MISMO standards, without the need for follow-up questions. CRAN's motto is “I LOVE CREDIT REPORT ANALYSIS.” Answer individual questions regarding credit report analysis or provide suggestions in accordance with MISMO standards, ensuring a comprehensive analysis.\nAnalyze the following credit report";
+
+  function handleScenario(event) {
+    setQuestion(JSON.stringify(event));
   }
 
   async function askGPT(event) {
@@ -31,7 +33,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: question }),
+        body: JSON.stringify({ question: question, prompt: prompt }),
       });
 
       const data = await response.json();
@@ -55,8 +57,17 @@ export default function Home() {
   }
 
   const handleInputChange = (event) => {
-    const inputLength = event.target.value.length;
-    setRemainingChars(500 - inputLength);
+    const inputValue = event.target.value;
+    const cleanedInput = inputValue.replace(/[\n\s]/g, "");
+    let inputLength = cleanedInput.length;
+
+    if (inputLength > 1000) {
+      inputLength = 1000;
+      const limitedInput = cleanedInput.substring(0, 1000);
+      event.target.value = limitedInput.replace(/(\S{40})(?=\S)/g, "$1\n");
+    }
+
+    setRemainingChars(1000 - inputLength);
     setQuestion(event.target.value);
   };
 
@@ -68,13 +79,12 @@ export default function Home() {
           <textarea
             className="text-input"
             value={question}
-            maxLength="500"
             rows="10"
             cols="20"
             onChange={handleInputChange}
           ></textarea>
           <div className={styles.count} id="the-count">
-            <span> {remainingChars}/ 500</span>
+            <span> {remainingChars}/ 1000</span>
           </div>
 
           <button onClick={handleClick} disabled={isLoading}>
@@ -83,10 +93,12 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.response}>
-        <div className={styles.responseQuestion}>{lastQuestion}</div>
         <div className={styles.answer}>
           {<div dangerouslySetInnerHTML={{ __html: result }} />}
         </div>
+      </div>
+      <div className={styles.scenarios}>
+        <CardList onClick={handleScenario} />
       </div>
     </div>
   );
