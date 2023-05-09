@@ -210,3 +210,30 @@
   background-color: #fff;
   border-bottom: 2px solid #11A37F; 
 }
+
+
+/* Hide all tab content by default */
+.tab-content {
+  display: none;
+}
+
+/* Show the active tab content based on the URL fragment identifier */
+.tab-content:target {
+  display: block;
+}
+
+/* Style the tab links */
+.tabs a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ddd;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Style the active tab link */
+.tabs a:target {
+  background-color: #fff;
+}
+

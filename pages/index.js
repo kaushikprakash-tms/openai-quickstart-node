@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import AskAI from "./AskAI";
 import RunScenario from "./RunScenario"
@@ -9,6 +9,13 @@ import Tab from './Tab';
 import TabPanel from './TabPanel';
 
 export default function Home() {
+
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
@@ -20,7 +27,7 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/New_TMS_Logo_Standard.png" className={styles.logo} />
         <div className="App">
-            <Tabs>
+            <Tabs loading={isLoading}>
               <TabList>
                 <Tab>Ask AI</Tab>
                 <Tab>Run a Scenario</Tab>
@@ -32,18 +39,6 @@ export default function Home() {
                 <RunScenario />
               </TabPanel>
             </Tabs>
-
-          {/* <Tabs>
-            <TabList>
-              <Tab>Tab 1</Tab>
-              <Tab>Tab 2</Tab>
-              <Tab>Tab 3</Tab>
-            </TabList>
-            <TabPanel>Panel 1</TabPanel>
-            <TabPanel>Panel 2</TabPanel>
-            <TabPanel>Panel 3</TabPanel>
-          </Tabs> */}
-
         </div>
       </main>
     </div>
