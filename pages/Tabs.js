@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.module.css';
 
-const Tabs = ({ children, loading }) => {
+const Tabs = ({ children}) => {
 
   if (!children) {
     return null;
@@ -12,23 +12,10 @@ const Tabs = ({ children, loading }) => {
   const tabPanels = children.filter(child => child.type.name === 'TabPanel');
   const newTabList = React.cloneElement(tabList, { activeTab, setActiveTab });
 
-  useEffect(() => {
-    if (loading) {
-      setActiveTab(-1);
-    } else if (activeTab === -1) {
-      setActiveTab(0);
-    }
-  }, [loading]);
-
-  
   return (
     <div className={styles.tabs}>
       {newTabList}
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        tabPanels[activeTab]
-      )}
+      {tabPanels[activeTab]}
     </div>
   );
 };

@@ -10,8 +10,6 @@ import TabPanel from './TabPanel';
 
 export default function Home() {
 
-  const [isLoading, setIsLoading] = useState(true);
-  
   return (
     <div>
       <Head>
@@ -22,7 +20,7 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/New_TMS_Logo_Standard.png" className={styles.logo} />
         <div className="App">
-            <Tabs loading={isLoading}>
+            <Tabs>
               <TabList>
                 <Tab>Ask AI</Tab>
                 <Tab>Run a Scenario</Tab>
