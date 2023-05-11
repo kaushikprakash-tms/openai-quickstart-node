@@ -141,6 +141,7 @@
   margin-top: 20px;
   max-width: 50vw;
   min-width: 300px;
+  flex-basis: fit-content;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -154,7 +155,7 @@
 .answer{
   align-items: center;
   text-align: justify;
-  font-size: 0.5vw;
+  font-size: 0.8vw;
 }
 
 .container{
@@ -167,7 +168,7 @@
 .responseQuestion{
   font-weight: 600;
   max-width: 50vw;
-  font-size: 0.5vw;
+  font-size: 0.8vw;
 }
 
 .header{
