@@ -48,7 +48,7 @@ export default function Home() {
         data.result.replace(/\n/g, "<br />").replace("<br /><br />", "<br />")
       );
       setLastQuestion(question);
-      setQuestion("");
+      // setQuestion("");
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
